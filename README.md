@@ -1,120 +1,123 @@
-# Muhammad Owais — Automation Website
+# OWAIS BUILDS — Automation Website (v2)
 
-A single-page website for your GoHighLevel & business automation brand, built with
-plain HTML, CSS, and JavaScript — no frameworks, no build tools, no backend.
-
-```
-├── index.html          ← all the page content lives here
-├── css/style.css        ← all the styling
-├── js/script.js         ← nav menu, FAQ, animations, form handling
-├── assets/icons/         ← favicon
-├── CNAME                 ← tells GitHub Pages to use owaisbuilds.site
-├── robots.txt
-└── sitemap.xml
-```
-
-Open `index.html` in a browser (just double-click it) and the whole site works,
-right off your computer, before you deploy anything.
+A redesign of the existing single-page site — same tech (HTML5, CSS3, vanilla
+JS, no backend), new brand, new structure, and a genuinely "live product"
+feeling hero and demo section.
 
 ---
 
-## 1. Put the files on GitHub
+## ⚠ Fix this first: your live site is missing files
 
-1. Go to [github.com](https://github.com) and log in (or create a free account).
-2. Click the **+** icon top-right → **New repository**.
-3. Name it anything (e.g. `owaisbuilds-site`). Keep it **Public** — free GitHub
-   Pages with a custom domain requires a public repo.
-4. Don't add a README/gitignore in this step (you already have one) — just click
-   **Create repository**.
-5. On the next page, click **uploading an existing file**, then drag in
-   *everything inside this folder* (`index.html`, the `css`, `js`, and `assets`
-   folders, `CNAME`, `robots.txt`, `sitemap.xml`, and this `README.md`) — keep
-   the folder structure exactly as it is.
-6. Scroll down and click **Commit changes**.
+Inspecting the ZIP you sent from `owais-tanoli/owaisbuilds.site`, the repo
+only contains `index.html`, `CNAME`, `robots.txt`, `sitemap.xml`, and
+`README.md`. **The `css/`, `js/`, and `assets/` folders never made it to
+GitHub.** Right now, `owaisbuilds.site` is live with no styling, no
+JavaScript (no working mobile menu, no FAQ accordion), and no favicon — the
+raw, unstyled HTML.
 
----
-
-## 2. Turn on GitHub Pages
-
-1. In your repository, click **Settings** (top menu bar).
-2. In the left sidebar, click **Pages**.
-3. Under **Build and deployment → Source**, choose **Deploy from a branch**.
-4. Under **Branch**, choose `main` and folder `/ (root)`, then **Save**.
-5. Wait a minute, refresh the page — GitHub will show you a link like
-   `https://yourusername.github.io/owaisbuilds-site/`. Open it to confirm the
-   site is live.
+This almost always happens when dragging individual files into GitHub's
+upload box instead of dragging the folders themselves. The update guide
+below fixes it — just make sure the `css`, `js`, and `assets` **folders**
+end up in the repo this time, not only the files inside them.
 
 ---
 
-## 3. Connect your Spaceship domain (owaisbuilds.site)
+## What changed
 
-The `CNAME` file in this project already tells GitHub to serve the site at
-`owaisbuilds.site`. You just need to point the domain at GitHub on Spaceship's
-side:
+**Changed files** (full new versions, included in this delivery):
+- `index.html` — new sections, new copy, new brand, new hero/demo visuals
+- `css/style.css` — new design system components (see below)
+- `js/script.js` — same behavior as before, one comment updated to point to
+  the new Calendar section's embed placeholder
+- `README.md` — this file
 
-1. Log in to [Spaceship](https://spaceship.com) and open the DNS settings for
-   `owaisbuilds.site`.
-2. Add **four A records** for the root domain (`@` or blank host), each
-   pointing to one of GitHub's Pages IP addresses:
-   ```
-   185.199.108.153
-   185.199.109.153
-   185.199.110.153
-   185.199.111.153
-   ```
-3. If you also want `www.owaisbuilds.site` to work, add a **CNAME record**:
-   - Host: `www`
-   - Value: `yourusername.github.io`
-4. Back in GitHub → **Settings → Pages**, under **Custom domain**, type
-   `owaisbuilds.site` and click **Save**. GitHub will check your DNS — this can
-   take anywhere from a few minutes to a day.
-5. Once GitHub shows a green checkmark next to the domain, tick
-   **Enforce HTTPS**. This may take a little while to become available after
-   DNS first verifies.
+**Unchanged** (included so the repo is complete, but identical to before):
+- `CNAME`, `robots.txt`, `sitemap.xml`, `assets/icons/favicon.svg`
 
----
+**Removed:**
+- The Testimonials section/placeholder — it wasn't part of the new brief and
+  had no real content in it yet. Nothing else was removed.
 
-## 4. Where to make it yours
+### Content/structure changes
+- Brand is now **OWAIS BUILDS** (wordmark in the nav/footer); the About
+  section still names you, Muhammad Owais, as the founder.
+- New hero: headline "Turn More Leads Into Customers — Automatically.", an
+  eyebrow line, a small tech-stack row, and a redesigned right-side visual —
+  a "dashboard card" showing a live-looking 8-stage pipeline (New Lead → GHL
+  CRM → AI Qualification → Instant SMS → Email Follow-Up → Booking → Sales
+  Pipeline → Follow-Up), each stage with a status line and a checkmark that
+  animates in on a continuous loop, so it reads as a running system rather
+  than a static diagram.
+- New Problem section: six "problem chips" (Missed Calls, Slow Responses,
+  etc.) plus a side-by-side Manual Process vs. Automated Process comparison.
+- Services, Industries, and How It Works follow your updated copy and
+  service list.
+- A bigger 12-stage "Automation Demonstration" section, styled like the hero
+  dashboard, that reveals itself as you scroll to it.
+- Projects section is renamed **Automation Systems I've Built**, each card
+  labeled **DEMO PROJECT**, showing the problem and workflow only — no
+  invented results, per your instructions.
+- About section now shows a designed "Professional Photo" placeholder
+  instead of bracketed placeholder text.
+- New **Free Automation Audit** banner, separate **Contact** form, and a
+  separate **Calendar** section with its own GHL embed placeholder.
+- FAQ has your updated 10 questions, including the new missed-call one.
+- Footer/nav reordered to match your requested navigation (Services,
+  Industries, How It Works, Projects, About, FAQ).
 
-Everything below is a straightforward find-and-edit in `index.html` — use your
-editor's search (Ctrl/Cmd+F) for the bolded text to jump straight there.
-
-- **Your photo** — search for `[YOUR PHOTO HERE]`. Replace that placeholder
-  `<div>` with an `<img>` tag pointing to a photo you've added under
-  `assets/images/`.
-- **Your logo** — the nav and footer currently use a text logo ("Muhammad
-  Owais") plus a small SVG mark (`#i-logo` in the icon sprite near the top of
-  `index.html`). Swap the `<svg><use href="#i-logo"/></svg>` for an `<img>` tag
-  if you design a real logo later.
-- **GHL contact form** — search for `GHL FORM EMBED GOES HERE` (just above the
-  `<form id="automation-consultation-form">`). You can either paste your GHL
-  form/calendar embed code right there instead of the existing form, or keep
-  this form and point `js/script.js`'s submit handler at a GHL webhook URL
-  (there's a comment in that file marking exactly where).
-- **GHL calendar** — the same idea applies anywhere you want a live booking
-  calendar instead of a "Book a Call" button (currently those buttons just
-  scroll down to the contact section).
-- **Contact info** — search for `[Add your business email]` and
-  `[Add your phone number]` in the footer.
-- **Social links** — search for `Add social links when ready` in the footer.
-- **Real testimonials** — search for `[Your future client testimonial will
-  appear here.]` (there are three). Replace the text inside each
-  `<p class="testimonial-card__text">`.
-- **Real case studies** — search for `[ADD REAL RESULT HERE]` (four spots in
-  the Projects section) and fill in actual outcomes once you have them. Feel
-  free to add or remove project cards as your work builds up.
-- **OG preview image** — search for `Add an og:image` near the top of
-  `index.html` if you want a custom image shown when the site is shared on
-  social media.
+### No fake content
+No testimonials, client logos, stats, years of experience, or case-study
+results were added anywhere. The four project cards are explicitly labeled
+DEMO PROJECT. The GHL form and calendar are marked with HTML comments
+(`GHL FORM EMBED GOES HERE`, `GHL CALENDAR EMBED GOES HERE`) and no endpoint
+or calendar URL was invented.
 
 ---
 
-## 5. A couple of notes
+## Update your GitHub repo
 
-- The contact form doesn't send anywhere yet on purpose — it's built with
-  clean, labeled fields (`id="automation-consultation-form"`) so you can wire
-  it up to GoHighLevel however you prefer, without me guessing at an endpoint.
-- `sitemap.xml` and `robots.txt` already point at `owaisbuilds.site` — no
-  changes needed unless the domain changes.
-- Everything is responsive (phone/tablet/desktop) and respects
-  "reduced motion" settings for visitors who prefer fewer animations.
+Your repo (`owais-tanoli/owaisbuilds.site`) already exists, so this is an
+update, not a fresh setup.
+
+1. **Unzip** the file you were given. You should see `index.html`, `css/`,
+   `js/`, `assets/`, `CNAME`, `robots.txt`, `sitemap.xml`, `README.md`.
+2. Go to your repo on GitHub → **Add file → Upload files**.
+3. Drag in `index.html`, `CNAME`, `robots.txt`, `sitemap.xml`, and
+   `README.md` first — since these already exist in the repo, GitHub will
+   just replace them.
+4. Now drag in the **`css` folder itself** (not just `style.css`), the
+   **`js` folder itself**, and the **`assets` folder itself**. In Chrome or
+   Edge, dragging a folder onto the upload box keeps its internal structure.
+   If your browser flattens them into loose files instead, open each folder
+   individually and drag its contents in one folder at a time so GitHub
+   creates the matching path.
+5. Scroll down, commit the changes (e.g. "Redesign site (v2)").
+6. **Verify it worked**: browse your repo's file list on GitHub. You should
+   see `css/`, `js/`, and `assets/` listed as folders, each containing their
+   files, sitting next to `index.html` — not just the files loose at the
+   root.
+7. Give GitHub Pages a minute, then hard-refresh `owaisbuilds.site`
+   (Ctrl/Cmd+Shift+R) to bypass any cached old version.
+
+If you'd rather avoid the browser upload box entirely, **GitHub Desktop**
+(a free app) lets you point at a local folder and sync the whole thing in
+one go — usually more reliable than drag-and-drop for a full folder
+structure like this one.
+
+---
+
+## Where to make it yours (search in `index.html`)
+
+- **Your photo** — search `Professional Photo`, replace the placeholder
+  `<div>` with an `<img>`.
+- **GHL contact form** — search `GHL FORM EMBED GOES HERE`.
+- **GHL calendar** — search `GHL CALENDAR EMBED GOES HERE` (in the Calendar
+  section).
+- **Contact info / social links** — search `[Add your business email]`,
+  `[Add your phone number]`, and `Add social links when ready` in the
+  footer.
+- **Real project results** — as jobs get completed, add real client
+  projects as new `.project-card` entries (copy an existing one) instead of
+  replacing the demo cards, so the DEMO PROJECT label stays honest for the
+  ones that are still demos.
+- **OG preview image** — search `Add an og:image` near the top of the file.
