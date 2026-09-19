@@ -611,7 +611,7 @@ section{ scroll-margin-top: 84px; }
   .hv-chip--top{ left:8px; }
   .hv-chip--bottom{ right:8px; }
 }
-/* ===== Push hero visual to the right ===== */
+
 .hero__grid{
   grid-template-columns:minmax(0,1fr) minmax(0,1fr);
 }
@@ -651,4 +651,51 @@ section{ scroll-margin-top: 84px; }
 }
 @media (max-width:600px){
   .btn{ white-space:normal; text-align:center; }
+}
+/* ===== Hero layout: desktop vs mobile ===== */
+@media (min-width:961px){
+  .hero__grid{ grid-template-columns:minmax(0,1fr) minmax(0,1fr); }
+  .hero__grid > .hv{
+    justify-self:end;
+    margin-left:auto;
+    margin-right:0;
+    max-width:500px;
+  }
+}
+@media (min-width:1200px){
+  .hero__grid > .hv{ transform:translateX(30px); }
+}
+
+/* Phones and tablets: back to one full-width column */
+@media (max-width:960px){
+  .hero__grid{
+    grid-template-columns:1fr !important;
+    gap:24px;
+  }
+  .hero__content{ max-width:100% !important; }
+  .hero__grid > .hv{
+    justify-self:center;
+    margin:0 auto;
+    max-width:420px;
+    transform:none;
+  }
+}
+
+/* Hero buttons on phones */
+@media (max-width:600px){
+  .hero__ctas{
+    display:flex;
+    flex-direction:column;
+    align-items:stretch;
+    gap:12px;
+  }
+  .hero__ctas .btn{
+    width:100%;
+    justify-content:center;
+    text-align:center;
+    white-space:normal !important;
+    padding:14px 18px;
+    font-size:15px;
+    line-height:1.25;
+  }
 }
