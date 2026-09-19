@@ -611,3 +611,18 @@ section{ scroll-margin-top: 84px; }
   .hv-chip--top{ left:8px; }
   .hv-chip--bottom{ right:8px; }
 }
+/* ===== Push hero visual to the right ===== */
+.hero__grid{
+  grid-template-columns:minmax(0,1fr) minmax(0,1fr);
+}
+.hero__grid > .hv{
+  justify-self:end;
+  margin-left:auto;
+  margin-right:0;
+  max-width:500px;
+}
+
+/* Optional: nudge it slightly past the container edge on big screens */
+@media (min-width:1200px){
+  .hero__grid > .hv{ transform:translateX(30px); }
+}
