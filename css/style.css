@@ -626,3 +626,26 @@ section{ scroll-margin-top: 84px; }
 @media (min-width:1200px){
   .hero__grid > .hv{ transform:translateX(30px); }
 }
+/* ===== Hero buttons on mobile ===== */
+@media (max-width:600px){
+  .hero__ctas{
+    display:flex;
+    flex-direction:column;
+    align-items:stretch;
+    gap:12px;
+  }
+  .hero__ctas .btn{
+    width:100%;
+    justify-content:center;
+    text-align:center;
+    white-space:normal;
+    padding:14px 18px;
+    font-size:15px;
+    line-height:1.25;
+  }
+}
+
+/* Very small phones */
+@media (max-width:360px){
+  .hero__ctas .btn{ font-size:14px; padding:13px 14px; }
+}
