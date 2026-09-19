@@ -649,3 +649,6 @@ section{ scroll-margin-top: 84px; }
 @media (max-width:360px){
   .hero__ctas .btn{ font-size:14px; padding:13px 14px; }
 }
+@media (max-width:600px){
+  .btn{ white-space:normal; text-align:center; }
+}
