@@ -121,3 +121,24 @@ structure like this one.
   replacing the demo cards, so the DEMO PROJECT label stays honest for the
   ones that are still demos.
 - **OG preview image** — search `Add an og:image` near the top of the file.
+
+---
+
+## Animated hero background (added)
+
+The hero now has a quiet animated backdrop instead of a flat background:
+a few soft gradient blobs that slowly drift (`css/style.css`, search
+`hero__mesh`), plus a faint dot-and-line network drawn on a `<canvas>`
+behind the text (`js/script.js`, search `HERO AMBIENT NETWORK`). It's pure
+CSS/Canvas — no video file, no external library, nothing to host.
+
+It's built to stay out of the way:
+- It pauses automatically when the tab isn't active or the hero scrolls
+  out of view, so it isn't running (or draining battery) while someone
+  reads the rest of the page.
+- Visitors who've turned on "reduce motion" in their OS/browser settings
+  get a still version — no animation runs for them at all.
+- The dot count scales down on small screens.
+
+To turn it off entirely, remove the `<div class="hero__bg">…</div>` block
+near the top of the Hero section in `index.html`.
