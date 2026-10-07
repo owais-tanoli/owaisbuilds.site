@@ -140,22 +140,6 @@
    in the Calendar section — search for
    "GHL CALENDAR EMBED GOES HERE" in index.html.
    ========================================================= */
-(function () {
-  const form = document.getElementById('automation-consultation-form');
-  const status = document.getElementById('form-status');
-  if (!form || !status) return;
-
-  form.addEventListener('submit', (e) => {
-    e.preventDefault();
-
-    const data = Object.fromEntries(new FormData(form).entries());
-    console.log('Automation consultation request (not yet sent anywhere):', data);
-
-    status.textContent =
-      "This form isn't connected to anything yet — hook it up to your GoHighLevel form, calendar, or webhook to start receiving these.";
-    status.removeAttribute('data-state');
-  });
-})();
 /* ============ HERO AMBIENT NETWORK ANIMATION ============ */
 (function () {
   const canvas = document.getElementById('hero-network');
