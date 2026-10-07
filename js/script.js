@@ -156,3 +156,127 @@
     status.removeAttribute('data-state');
   });
 })();
+/* ============ HERO AMBIENT NETWORK ANIMATION ============ */
+(function () {
+  const canvas = document.getElementById('hero-network');
+  const hero = document.getElementById('home');
+  if (!canvas || !hero) return;
+
+  const prefersReducedMotion = window.matchMedia('(prefers-reduced-motion: reduce)').matches;
+  if (prefersReducedMotion) return;
+
+  const ctx = canvas.getContext('2d');
+  const DOT_COLOR = '76, 111, 255';
+  const LINE_COLOR = '157, 92, 224';
+  const LINK_DISTANCE = 130;
+
+  let width = 0, height = 0, dpr = 1;
+  let points = [];
+  let rafId = null;
+  let running = false;
+
+  function sizeCanvas() {
+    const rect = hero.getBoundingClientRect();
+    width = rect.width;
+    height = rect.height;
+    dpr = Math.min(window.devicePixelRatio || 1, 1.5);
+    canvas.width = width * dpr;
+    canvas.height = height * dpr;
+    canvas.style.width = width + 'px';
+    canvas.style.height = height + 'px';
+    ctx.setTransform(dpr, 0, 0, dpr, 0, 0);
+  }
+
+  function makePoints() {
+    const isSmall = width < 720;
+    const count = Math.min(isSmall ? 22 : 46, Math.floor((width * height) / 26000));
+    points = Array.from({ length: Math.max(count, 12) }, () => ({
+      x: Math.random() * width,
+      y: Math.random() * height,
+      vx: (Math.random() - 0.5) * 0.18,
+      vy: (Math.random() - 0.5) * 0.18,
+      r: Math.random() * 1.4 + 0.9
+    }));
+  }
+
+  function step() {
+    ctx.clearRect(0, 0, width, height);
+
+    for (const p of points) {
+      p.x += p.vx;
+      p.y += p.vy;
+      if (p.x < 0 || p.x > width) p.vx *= -1;
+      if (p.y < 0 || p.y > height) p.vy *= -1;
+    }
+
+    for (let i = 0; i < points.length; i++) {
+      for (let j = i + 1; j < points.length; j++) {
+        const dx = points[i].x - points[j].x;
+        const dy = points[i].y - points[j].y;
+        const dist = Math.sqrt(dx * dx + dy * dy);
+        if (dist < LINK_DISTANCE) {
+          ctx.strokeStyle = `rgba(${LINE_COLOR}, ${0.16 * (1 - dist / LINK_DISTANCE)})`;
+          ctx.lineWidth = 1;
+          ctx.beginPath();
+          ctx.moveTo(points[i].x, points[i].y);
+          ctx.lineTo(points[j].x, points[j].y);
+          ctx.stroke();
+        }
+      }
+    }
+
+    for (const p of points) {
+      ctx.fillStyle = `rgba(${DOT_COLOR}, 0.5)`;
+      ctx.beginPath();
+      ctx.arc(p.x, p.y, p.r, 0, Math.PI * 2);
+      ctx.fill();
+    }
+
+    if (running) rafId = requestAnimationFrame(step);
+  }
+
+  function start() {
+    if (running) return;
+    running = true;
+    rafId = requestAnimationFrame(step);
+  }
+
+  function stop() {
+    running = false;
+    if (rafId) cancelAnimationFrame(rafId);
+    rafId = null;
+  }
+
+  function rebuild() {
+    sizeCanvas();
+    makePoints();
+  }
+
+  rebuild();
+
+  let resizeTimer;
+  window.addEventListener('resize', () => {
+    clearTimeout(resizeTimer);
+    resizeTimer = setTimeout(rebuild, 200);
+  });
+
+  let heroInView = true;
+  document.addEventListener('visibilitychange', () => {
+    if (document.hidden) stop();
+    else if (heroInView) start();
+  });
+
+  if ('IntersectionObserver' in window) {
+    const io = new IntersectionObserver(
+      (entries) => {
+        heroInView = entries[0].isIntersecting;
+        if (heroInView && !document.hidden) start();
+        else stop();
+      },
+      { threshold: 0 }
+    );
+    io.observe(hero);
+  } else {
+    start();
+  }
+})();
