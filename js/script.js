@@ -20,12 +20,10 @@
     setOpen(!links.classList.contains('is-open'));
   });
 
-  // Close the menu whenever a nav link is clicked (mobile).
   links.querySelectorAll('a').forEach((a) => {
     a.addEventListener('click', () => setOpen(false));
   });
 
-  // Close on Escape for keyboard users.
   document.addEventListener('keydown', (e) => {
     if (e.key === 'Escape') setOpen(false);
   });
@@ -33,8 +31,6 @@
 
 /* =========================================================
    FAQ ACCORDION
-   Each question toggles its own answer open/closed.
-   Multiple answers can be open at the same time.
    ========================================================= */
 (function () {
   const items = document.querySelectorAll('.faq-item');
@@ -57,8 +53,6 @@
 
 /* =========================================================
    SCROLL-TRIGGERED REVEAL
-   Fades in the automation-demo pipeline once it scrolls
-   into view, instead of animating on every page load.
    ========================================================= */
 (function () {
   const demoPipeline = document.querySelector('.pipeline--demo');
@@ -84,9 +78,6 @@
 
 /* =========================================================
    FLOATING "BOOK A CALL" BUTTON (mobile)
-   Shows once the visitor scrolls past the hero, hides again
-   once the contact section (or footer) comes into view so
-   it never sits on top of the form.
    ========================================================= */
 (function () {
   const floatingCta = document.getElementById('floating-cta');
@@ -124,22 +115,24 @@
 
 /* =========================================================
    CONTACT FORM
-   There is no backend yet. This simply stops the page from
-   reloading and tells the visitor (and you, in the console)
-   what was submitted, so the form is easy to test.
-
-   TO CONNECT TO GOHIGHLEVEL:
-   Replace the code inside this function with either:
-   1) A GHL form embed (delete this <form> entirely and paste
-      the embed code where the comment says
-      "GHL FORM EMBED GOES HERE" in index.html), or
-   2) A fetch() POST request to a GHL webhook URL, sending
-      the same field values gathered below.
-
-   There's a separate placeholder for a GHL calendar embed
-   in the Calendar section — search for
-   "GHL CALENDAR EMBED GOES HERE" in index.html.
    ========================================================= */
+(function () {
+  const form = document.getElementById('automation-consultation-form');
+  const status = document.getElementById('form-status');
+  if (!form || !status) return;
+
+  form.addEventListener('submit', (e) => {
+    e.preventDefault();
+
+    const data = Object.fromEntries(new FormData(form).entries());
+    console.log('Automation consultation request (not yet sent anywhere):', data);
+
+    status.textContent =
+      "This form isn't connected to anything yet — hook it up to your GoHighLevel form, calendar, or webhook to start receiving these.";
+    status.removeAttribute('data-state');
+  });
+})();
+
 /* ============ HERO AMBIENT NETWORK ANIMATION ============ */
 (function () {
   const canvas = document.getElementById('hero-network');
