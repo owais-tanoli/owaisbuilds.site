@@ -218,11 +218,23 @@
   const saveData = navigator.connection && navigator.connection.saveData;
   if (reduce || small || saveData) return;
 
-  const VIDEO_URL = 'assets/hero-bg.mp4';
+  // The script tries these places in order and uses the first one that exists.
+  const VIDEO_CANDIDATES = [
+    'assets/hero-bg.mp4',
+    'assets/icons/hero-bg.mp4',
+    'assets/icons/hero-bg.mp4.mp4'
+  ];
 
-  fetch(VIDEO_URL, { method: 'HEAD' })
-    .then((res) => {
-      if (!res.ok) return;
+  function findVideo(index) {
+    if (index >= VIDEO_CANDIDATES.length) return Promise.resolve(null);
+    return fetch(VIDEO_CANDIDATES[index], { method: 'HEAD' })
+      .then((res) => (res.ok ? VIDEO_CANDIDATES[index] : findVideo(index + 1)))
+      .catch(() => findVideo(index + 1));
+  }
+
+  findVideo(0)
+    .then((VIDEO_URL) => {
+      if (!VIDEO_URL) return;
 
       const video = document.createElement('video');
       video.className = 'hero__video';
