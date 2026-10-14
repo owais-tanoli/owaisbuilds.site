@@ -114,23 +114,141 @@
 })();
 
 /* =========================================================
-   CONTACT FORM
+   HEADER SHADOW + SCROLL PROGRESS BAR
    ========================================================= */
 (function () {
-  const form = document.getElementById('automation-consultation-form');
-  const status = document.getElementById('form-status');
-  if (!form || !status) return;
+  const header = document.getElementById('site-header');
+  const bar = document.createElement('div');
+  bar.className = 'scroll-progress';
+  bar.setAttribute('aria-hidden', 'true');
+  document.body.appendChild(bar);
 
-  form.addEventListener('submit', (e) => {
-    e.preventDefault();
+  let ticking = false;
 
-    const data = Object.fromEntries(new FormData(form).entries());
-    console.log('Automation consultation request (not yet sent anywhere):', data);
+  function update() {
+    const y = window.scrollY || document.documentElement.scrollTop;
+    const max = document.documentElement.scrollHeight - window.innerHeight;
+    bar.style.transform = 'scaleX(' + (max > 0 ? Math.min(y / max, 1) : 0) + ')';
+    if (header) header.classList.toggle('is-scrolled', y > 24);
+    ticking = false;
+  }
 
-    status.textContent =
-      "This form isn't connected to anything yet — hook it up to your GoHighLevel form, calendar, or webhook to start receiving these.";
-    status.removeAttribute('data-state');
+  window.addEventListener('scroll', () => {
+    if (!ticking) {
+      ticking = true;
+      requestAnimationFrame(update);
+    }
+  }, { passive: true });
+  window.addEventListener('resize', update);
+  update();
+})();
+
+/* =========================================================
+   SCROLL REVEAL
+   Elements fade and slide up as they enter the screen.
+   If anything fails, the content simply stays visible.
+   ========================================================= */
+(function () {
+  if (!('IntersectionObserver' in window)) return;
+  if (window.matchMedia('(prefers-reduced-motion: reduce)').matches) return;
+
+  const selector = [
+    '.section__head', '.chip', '.compare__caption', '.compare__col', '.service-card', '.tag',
+    '.step', '.dashboard-card--demo', '.project-card', '.about__photo', '.about__body',
+    '.audit__panel', '.contact__info', '.contact__form', '.calendar__embed', '.faq-item'
+  ].join(',');
+
+  const targets = Array.from(document.querySelectorAll(selector));
+  if (!targets.length) return;
+
+  targets.forEach((el) => {
+    const siblings = Array.from(el.parentElement.children);
+    const index = siblings.indexOf(el) % 6;
+    el.style.setProperty('--rd', (index * 0.08).toFixed(2) + 's');
+    el.classList.add('reveal');
   });
+  document.documentElement.classList.add('reveal-ready');
+
+  const observer = new IntersectionObserver(
+    (entries) => {
+      entries.forEach((entry) => {
+        if (!entry.isIntersecting) return;
+        const el = entry.target;
+        el.classList.add('is-in');
+        observer.unobserve(el);
+        // After the entrance finishes, drop the helper classes so hover effects stay snappy.
+        setTimeout(() => {
+          el.classList.remove('reveal', 'is-in');
+          el.style.removeProperty('--rd');
+        }, 1500);
+      });
+    },
+    { threshold: 0.12, rootMargin: '0px 0px -40px 0px' }
+  );
+
+  targets.forEach((el) => observer.observe(el));
+})();
+
+/* =========================================================
+   CARD SPOTLIGHT (glow follows the mouse over cards)
+   ========================================================= */
+(function () {
+  document.addEventListener('pointermove', (e) => {
+    const card = e.target.closest && e.target.closest('.service-card, .project-card');
+    if (!card) return;
+    const rect = card.getBoundingClientRect();
+    card.style.setProperty('--mx', e.clientX - rect.left + 'px');
+    card.style.setProperty('--my', e.clientY - rect.top + 'px');
+  }, { passive: true });
+})();
+
+/* =========================================================
+   OPTIONAL VIDEO BACKGROUND
+   Drop a file named hero-bg.mp4 into the assets folder and it
+   fades in behind the hero. If the file isn't there, nothing
+   happens and the animated background is used instead.
+   Skipped on phones, data-saver mode and "reduce motion".
+   ========================================================= */
+(function () {
+  const bg = document.querySelector('.hero__bg');
+  if (!bg) return;
+
+  const reduce = window.matchMedia('(prefers-reduced-motion: reduce)').matches;
+  const small = window.innerWidth < 720;
+  const saveData = navigator.connection && navigator.connection.saveData;
+  if (reduce || small || saveData) return;
+
+  const VIDEO_URL = 'assets/hero-bg.mp4';
+
+  fetch(VIDEO_URL, { method: 'HEAD' })
+    .then((res) => {
+      if (!res.ok) return;
+
+      const video = document.createElement('video');
+      video.className = 'hero__video';
+      video.muted = true;
+      video.loop = true;
+      video.autoplay = true;
+      video.playsInline = true;
+      video.preload = 'auto';
+      video.setAttribute('aria-hidden', 'true');
+      video.addEventListener('canplay', () => {
+        video.classList.add('is-ready');
+        video.play().catch(() => {});
+      }, { once: true });
+      video.addEventListener('error', () => video.remove());
+      video.src = VIDEO_URL;
+      bg.insertBefore(video, bg.firstChild);
+
+      // Pause the video when the hero is off-screen to save battery.
+      if ('IntersectionObserver' in window) {
+        new IntersectionObserver((entries) => {
+          if (entries[0].isIntersecting) video.play().catch(() => {});
+          else video.pause();
+        }).observe(bg);
+      }
+    })
+    .catch(() => {});
 })();
 
 /* ============ HERO AMBIENT NETWORK ANIMATION ============ */
