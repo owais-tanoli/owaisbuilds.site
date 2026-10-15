@@ -854,9 +854,10 @@ body::before{
 /* optional video background (script.js adds it only if assets/hero-bg.mp4 exists) */
 .hero__video{
   position: absolute; inset: 0; width: 100%; height: 100%; object-fit: cover;
-  opacity: 0; transition: opacity 1.4s ease; filter: saturate(1.15) contrast(1.05);
+  opacity: 0.45; filter: saturate(1.15) contrast(1.05);
+  animation: video-in 1.6s ease both;
 }
-.hero__video.is-ready{ opacity: 0.4; }
+@keyframes video-in{ from{ opacity: 0; } to{ opacity: 0.45; } }
 
 /* glowing, floating hero card */
 .hero__visual::before{
@@ -1035,7 +1036,6 @@ body::before{
 }
 @media (max-width: 720px){
   .hero__title{ font-size: clamp(2.1rem, 9vw, 2.8rem); }
-  .hero__video{ display: none; }
   .hero__mesh{ width: 340px; height: 340px; }
   .hero__mesh::before{ width: 300px; height: 300px; }
   .hero__mesh::after{ width: 260px; height: 260px; }
