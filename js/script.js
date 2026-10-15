@@ -1,7 +1,5 @@
 /* =========================================================
    MOBILE NAVIGATION
-   Toggles the nav menu open/closed on small screens and
-   swaps the menu icon for a close (X) icon.
    ========================================================= */
 (function () {
   const toggle = document.getElementById('nav-toggle');
@@ -52,68 +50,6 @@
 })();
 
 /* =========================================================
-   SCROLL-TRIGGERED REVEAL
-   ========================================================= */
-(function () {
-  const demoPipeline = document.querySelector('.pipeline--demo');
-  if (!demoPipeline || !('IntersectionObserver' in window)) {
-    if (demoPipeline) demoPipeline.classList.add('is-visible');
-    return;
-  }
-
-  const observer = new IntersectionObserver(
-    (entries) => {
-      entries.forEach((entry) => {
-        if (entry.isIntersecting) {
-          demoPipeline.classList.add('is-visible');
-          observer.disconnect();
-        }
-      });
-    },
-    { threshold: 0.25 }
-  );
-
-  observer.observe(demoPipeline);
-})();
-
-/* =========================================================
-   FLOATING "BOOK A CALL" BUTTON (mobile)
-   ========================================================= */
-(function () {
-  const floatingCta = document.getElementById('floating-cta');
-  const hero = document.getElementById('home');
-  const contact = document.getElementById('contact');
-  if (!floatingCta || !hero || !contact || !('IntersectionObserver' in window)) return;
-
-  let pastHero = false;
-
-  const heroObserver = new IntersectionObserver(
-    (entries) => {
-      pastHero = !entries[0].isIntersecting;
-      updateVisibility();
-    },
-    { threshold: 0 }
-  );
-
-  let inContact = false;
-
-  const contactObserver = new IntersectionObserver(
-    (entries) => {
-      inContact = entries[0].isIntersecting;
-      updateVisibility();
-    },
-    { threshold: 0 }
-  );
-
-  function updateVisibility() {
-    floatingCta.classList.toggle('is-visible', pastHero && !inContact);
-  }
-
-  heroObserver.observe(hero);
-  contactObserver.observe(contact);
-})();
-
-/* =========================================================
    HEADER SHADOW + SCROLL PROGRESS BAR
    ========================================================= */
 (function () {
@@ -145,17 +81,18 @@
 
 /* =========================================================
    SCROLL REVEAL
-   Elements fade and slide up as they enter the screen.
-   If anything fails, the content simply stays visible.
+   Content fades in as it enters the screen. If anything
+   fails, the content simply stays visible.
    ========================================================= */
 (function () {
   if (!('IntersectionObserver' in window)) return;
   if (window.matchMedia('(prefers-reduced-motion: reduce)').matches) return;
 
   const selector = [
-    '.section__head', '.chip', '.compare__caption', '.compare__col', '.service-card', '.tag',
-    '.step', '.dashboard-card--demo', '.project-card', '.about__photo', '.about__body',
-    '.audit__panel', '.contact__info', '.contact__form', '.calendar__embed', '.faq-item'
+    '.section__head', '.chip', '.compare__caption', '.compare__col',
+    '.journey__steps', '.journey__panel', '.service-card', '.tag', '.step',
+    '.work-card', '.partners__copy', '.partners__item', '.about__photo', '.about__body',
+    '.audit__panel', '.contact__info', '.contact__form', '.faq-item'
   ].join(',');
 
   const targets = Array.from(document.querySelectorAll(selector));
@@ -176,7 +113,7 @@
         const el = entry.target;
         el.classList.add('is-in');
         observer.unobserve(el);
-        // After the entrance finishes, drop the helper classes so hover effects stay snappy.
+        // Drop the helper classes after the entrance so hover effects stay snappy.
         setTimeout(() => {
           el.classList.remove('reveal', 'is-in');
           el.style.removeProperty('--rd');
@@ -194,7 +131,7 @@
    ========================================================= */
 (function () {
   document.addEventListener('pointermove', (e) => {
-    const card = e.target.closest && e.target.closest('.service-card, .project-card');
+    const card = e.target.closest && e.target.closest('.service-card, .work-card');
     if (!card) return;
     const rect = card.getBoundingClientRect();
     card.style.setProperty('--mx', e.clientX - rect.left + 'px');
@@ -203,64 +140,78 @@
 })();
 
 /* =========================================================
-   OPTIONAL VIDEO BACKGROUND
-   Drop a file named hero-bg.mp4 into the assets folder and it
-   fades in behind the hero. If the file isn't there, nothing
-   happens and the animated background is used instead.
-   Skipped on phones, data-saver mode and "reduce motion".
+   CONNECTED JOURNEY (interactive)
+   Each step's text comes from data-* attributes on its button,
+   so the copy lives in one place (index.html).
    ========================================================= */
 (function () {
-  const bg = document.querySelector('.hero__bg');
-  if (!bg) return;
+  const buttons = Array.from(document.querySelectorAll('.journey__step'));
+  if (!buttons.length) return;
 
-  const reduce = window.matchMedia('(prefers-reduced-motion: reduce)').matches;
-  const small = window.innerWidth < 720;
-  const saveData = navigator.connection && navigator.connection.saveData;
-  if (reduce || small || saveData) return;
+  const label = document.getElementById('journey-label');
+  const title = document.getElementById('journey-title');
+  const text = document.getElementById('journey-text');
+  const tools = document.getElementById('journey-tools');
+  const prev = document.getElementById('journey-prev');
+  const next = document.getElementById('journey-next');
+  if (!label || !title || !text || !tools || !prev || !next) return;
 
-  // The script tries these places in order and uses the first one that exists.
-  const VIDEO_CANDIDATES = [
-    'assets/hero-bg.mp4',
-    'assets/icons/hero-bg.mp4',
-    'assets/icons/hero-bg.mp4.mp4'
-  ];
+  let current = 0;
 
-  function findVideo(index) {
-    if (index >= VIDEO_CANDIDATES.length) return Promise.resolve(null);
-    return fetch(VIDEO_CANDIDATES[index], { method: 'HEAD' })
-      .then((res) => (res.ok ? VIDEO_CANDIDATES[index] : findVideo(index + 1)))
-      .catch(() => findVideo(index + 1));
+  function show(i) {
+    current = (i + buttons.length) % buttons.length;
+    const b = buttons[current];
+
+    buttons.forEach((btn, k) => {
+      const on = k === current;
+      btn.classList.toggle('is-active', on);
+      btn.setAttribute('aria-pressed', String(on));
+    });
+
+    label.textContent = 'Step ' + (current + 1) + ' of ' + buttons.length;
+    title.textContent = b.dataset.title;
+    text.textContent = b.dataset.text;
+    tools.textContent = b.dataset.tools;
   }
 
-  findVideo(0)
-    .then((VIDEO_URL) => {
-      if (!VIDEO_URL) return;
+  buttons.forEach((btn, k) => btn.addEventListener('click', () => show(k)));
+  prev.addEventListener('click', () => show(current - 1));
+  next.addEventListener('click', () => show(current + 1));
+  show(0);
+})();
 
-      const video = document.createElement('video');
-      video.className = 'hero__video';
-      video.muted = true;
-      video.loop = true;
-      video.autoplay = true;
-      video.playsInline = true;
-      video.preload = 'auto';
-      video.setAttribute('aria-hidden', 'true');
-      video.addEventListener('canplay', () => {
-        video.classList.add('is-ready');
-        video.play().catch(() => {});
-      }, { once: true });
-      video.addEventListener('error', () => video.remove());
-      video.src = VIDEO_URL;
-      bg.insertBefore(video, bg.firstChild);
+/* =========================================================
+   HERO VIDEO
+   The <video> tag lives in index.html, so it shows even if
+   this script fails. This only pauses it when the hero is
+   off-screen, and keeps it still for reduced-motion visitors.
+   ========================================================= */
+(function () {
+  const video = document.querySelector('.hero__video');
+  if (!video) return;
 
-      // Pause the video when the hero is off-screen to save battery.
-      if ('IntersectionObserver' in window) {
-        new IntersectionObserver((entries) => {
-          if (entries[0].isIntersecting) video.play().catch(() => {});
-          else video.pause();
-        }).observe(bg);
-      }
-    })
-    .catch(() => {});
+  video.muted = true;
+
+  if (window.matchMedia('(prefers-reduced-motion: reduce)').matches) {
+    video.removeAttribute('autoplay');
+    video.pause();
+    return;
+  }
+
+  function play() {
+    const attempt = video.play();
+    if (attempt && attempt.catch) attempt.catch(() => {});
+  }
+
+  play();
+  video.addEventListener('error', () => video.remove());
+
+  if ('IntersectionObserver' in window && video.parentElement) {
+    new IntersectionObserver((entries) => {
+      if (entries[0].isIntersecting) play();
+      else video.pause();
+    }).observe(video.parentElement);
+  }
 })();
 
 /* ============ HERO AMBIENT NETWORK ANIMATION ============ */
@@ -386,4 +337,34 @@
   } else {
     start();
   }
+})();
+
+/* =========================================================
+   FLOATING "DISCUSS A PROJECT" BUTTON (mobile)
+   ========================================================= */
+(function () {
+  const floatingCta = document.getElementById('floating-cta');
+  const hero = document.getElementById('home');
+  const contact = document.getElementById('contact');
+  if (!floatingCta || !hero || !contact || !('IntersectionObserver' in window)) return;
+
+  let pastHero = false;
+  let inContact = false;
+
+  const heroObserver = new IntersectionObserver((entries) => {
+    pastHero = !entries[0].isIntersecting;
+    updateVisibility();
+  }, { threshold: 0 });
+
+  const contactObserver = new IntersectionObserver((entries) => {
+    inContact = entries[0].isIntersecting;
+    updateVisibility();
+  }, { threshold: 0 });
+
+  function updateVisibility() {
+    floatingCta.classList.toggle('is-visible', pastHero && !inContact);
+  }
+
+  heroObserver.observe(hero);
+  contactObserver.observe(contact);
 })();
