@@ -156,11 +156,19 @@
   const next = document.getElementById('journey-next');
   if (!label || !title || !text || !tools || !prev || !next) return;
 
+  const panel = document.querySelector('.journey__panel');
   let current = 0;
 
   function show(i) {
     current = (i + buttons.length) % buttons.length;
     const b = buttons[current];
+
+    // Restart the panel's content animation on every change.
+    if (panel) {
+      panel.classList.remove('is-changing');
+      void panel.offsetWidth;
+      panel.classList.add('is-changing');
+    }
 
     buttons.forEach((btn, k) => {
       const on = k === current;
