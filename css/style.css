@@ -1159,3 +1159,83 @@ body::before{
 }
 .contact__steps strong{ color: var(--ink); font-weight: 600; }
 .contact__note{ margin-top: 22px; font-size: 0.9rem; color: var(--ink-faint); }
+
+/* =========================================================
+   MOTION v5 (follow-up pass)
+   Restrained: short ease-out curves, transform + opacity only.
+   Every entrance sits behind prefers-reduced-motion: no-preference.
+   ========================================================= */
+@keyframes m-rise{ from{ opacity: 0; transform: translateY(14px); } to{ opacity: 1; transform: none; } }
+@keyframes m-left{ from{ opacity: 0; transform: translateX(-10px); } to{ opacity: 1; transform: none; } }
+
+/* press feedback on every button */
+.btn:active{ transform: scale(0.97); transition-duration: .08s; }
+
+/* phones have no hover, so cards respond to a tap instead */
+@media (hover: none){
+  .service-card:active, .work-card:active, .faq-item:active, .partners__item:active, .tag:active{ transform: scale(0.985); }
+}
+
+@media (prefers-reduced-motion: no-preference){
+
+  /* hero: one short entrance sequence on load */
+  .hero__content > *{ animation: m-rise .8s var(--ease-out) both; }
+  .hero__content > :nth-child(2){ animation-delay: .08s; }
+  .hero__content > :nth-child(3){ animation-delay: .16s; }
+  .hero__content > :nth-child(4){ animation-delay: .24s; }
+  .hero__content > :nth-child(5){ animation-delay: .32s; }
+  .hero__visual{ animation: m-rise 1s var(--ease-out) .3s both; }
+
+  /* journey: an accent bar slides in on the active step, and the panel content swaps smoothly */
+  .journey__step::before{
+    content: ''; position: absolute; left: 0; top: 10px; bottom: 10px; width: 3px; border-radius: 3px;
+    background: var(--gradient); transform: scaleY(0);
+    transition: transform .35s var(--ease-out);
+  }
+  .journey__step[aria-pressed="true"]::before{ transform: scaleY(1); }
+  .journey__panel.is-changing > *{ animation: m-rise .45s var(--ease-out) both; }
+  .journey__panel.is-changing > :nth-child(2){ animation-delay: .05s; }
+  .journey__panel.is-changing > :nth-child(3){ animation-delay: .10s; }
+  .journey__panel.is-changing > :nth-child(4){ animation-delay: .15s; }
+  .journey__panel.is-changing > :nth-child(5){ animation-delay: .20s; }
+
+  /* lists inside cards cascade in once the card enters view */
+  .service-card.is-in .service-card__list li,
+  .compare__col.is-in .compare__flow li{ animation: m-left .5s var(--ease-out) both; }
+  .service-card.is-in .service-card__list li:nth-child(2),
+  .compare__col.is-in .compare__flow li:nth-child(2){ animation-delay: .05s; }
+  .service-card.is-in .service-card__list li:nth-child(3),
+  .compare__col.is-in .compare__flow li:nth-child(3){ animation-delay: .10s; }
+  .service-card.is-in .service-card__list li:nth-child(4),
+  .compare__col.is-in .compare__flow li:nth-child(4){ animation-delay: .15s; }
+  .service-card.is-in .service-card__list li:nth-child(5),
+  .compare__col.is-in .compare__flow li:nth-child(5){ animation-delay: .20s; }
+  .service-card.is-in .service-card__list li:nth-child(6),
+  .compare__col.is-in .compare__flow li:nth-child(6){ animation-delay: .25s; }
+  .service-card.is-in .service-card__list li:nth-child(7){ animation-delay: .30s; }
+  .service-card.is-in .service-card__list li:nth-child(8){ animation-delay: .35s; }
+  .service-card.is-in .service-card__list li:nth-child(9){ animation-delay: .40s; }
+
+  /* work cards: the copy rows rise in sequence */
+  .work-card.is-in > p{ animation: m-rise .5s var(--ease-out) both; }
+  .work-card.is-in > p:nth-of-type(2){ animation-delay: .06s; }
+  .work-card.is-in > p:nth-of-type(3){ animation-delay: .12s; }
+  .work-card.is-in > p:nth-of-type(4){ animation-delay: .18s; }
+}
+
+/* phones: the menu links cascade in when the menu opens */
+@media (max-width: 720px) and (prefers-reduced-motion: no-preference){
+  .nav__links.is-open a{ animation: m-left .4s var(--ease-out) both; }
+  .nav__links.is-open a:nth-child(2){ animation-delay: .05s; }
+  .nav__links.is-open a:nth-child(3){ animation-delay: .10s; }
+  .nav__links.is-open a:nth-child(4){ animation-delay: .15s; }
+  .nav__links.is-open a:nth-child(5){ animation-delay: .20s; }
+  .nav__links.is-open a:nth-child(6){ animation-delay: .25s; }
+}
+
+/* Phones: the header's blur effect traps the full-screen menu inside
+   the header box, so the menu goes invisible. Use a solid header instead. */
+@media (max-width: 720px){
+  .site-header{ -webkit-backdrop-filter: none; backdrop-filter: none; background: var(--bg); }
+  .site-header.is-scrolled{ background: var(--bg); }
+}
