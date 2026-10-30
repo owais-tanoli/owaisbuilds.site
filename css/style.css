@@ -1305,3 +1305,29 @@ h1, h2{
 }
 h3, h4{ font-family: var(--ff-display); font-weight: 600; letter-spacing: -0.01em; }
 .gradient-text{ font-style: italic; }
+
+/* =========================================================
+   v8 BLUE + AMBER: amber leads (buttons, headline accent, logo),
+   blue supports (icons, numbers, labels, focus and hover).
+   Delete this block to return to amber only.
+   ========================================================= */
+:root{
+  --sec:      #6F9BFF;
+  --sec-soft: rgba(111,155,255,0.14);
+  --sec-line: rgba(111,155,255,0.38);
+}
+.service-card__icon, .partners__item .icon, .faq-item[data-open="true"] .faq-item__icon,
+.journey__num, .journey__label, .work-card summary, .about__role,
+.contact__steps span, .step__number, .pipeline__node svg:not(.pipeline__check){ color: var(--sec); }
+.journey__label{ color: var(--sec); }
+.journey__num{ color: var(--sec); }
+.work-card summary{ color: var(--sec); }
+.pipeline__node svg:not(.pipeline__check){ border-color: var(--sec-line); background: rgba(20,17,15,0.9); }
+.about__role{ color: var(--sec); }
+.work-card__tag, .project-card__tag, .work-card .tag, .badge--concept{
+  color: var(--sec); background: var(--sec-soft); border-color: var(--sec-line);
+}
+.tag:hover, .btn--ghost:hover{ border-color: var(--sec); color: var(--sec); }
+.form-group input:focus, .form-group select:focus, .form-group textarea:focus{ border-color: var(--sec); }
+:focus-visible{ outline-color: var(--sec); }
+.faq-item[data-open="true"]{ border-color: var(--sec-line); }
