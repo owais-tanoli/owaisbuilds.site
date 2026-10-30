@@ -1239,3 +1239,50 @@ body::before{
   .site-header{ -webkit-backdrop-filter: none; backdrop-filter: none; background: var(--bg); }
   .site-header.is-scrolled{ background: var(--bg); }
 }
+
+/* =========================================================
+   v6 POLISH: one accent colour, no AI-style glow
+   Removes the blue-to-violet gradient text and glow blobs,
+   the spinning hero border, and the animated audit gradient.
+   Delete this whole block to return to the v5 look.
+   ========================================================= */
+:root{
+  --gradient: var(--blue);
+  --gradient-text: none;
+}
+.gradient-text, .about__role{
+  background: none; color: var(--blue);
+  -webkit-background-clip: border-box; background-clip: border-box;
+  animation: none; width: auto;
+}
+.hero__mesh, .hero__mesh::before, .hero__mesh::after,
+.hero__visual::before, .dashboard-card::before{ display: none; }
+.hero__visual .dashboard-card{ animation: none; }
+.dashboard-card{ box-shadow: 0 30px 70px -30px rgba(0,0,0,0.7), inset 0 1px 0 rgba(255,255,255,0.06); }
+.audit__panel{
+  background: #131A2E; animation: none; box-shadow: none;
+  border: 1px solid var(--line-strong);
+}
+.problem, .contact{ background: var(--bg-raised); }
+.demo{ background: var(--bg-raised); }
+.service-card--accent{ background: #131A2E; border: 1px solid rgba(76,111,255,0.45); }
+.service-card--accent::before{ background: var(--blue); }
+
+@media (max-width: 720px){
+  .hero__stack{ display: grid; grid-template-columns: repeat(3, auto); justify-content: start; gap: 8px 18px; }
+}
+/* keep the hero video and marquee from creating a sideways scroll on phones */
+html, body{ overflow-x: hidden; }
+.hero__video{ opacity: 0.28 !important; animation: none; }
+/* remove decorative glow orbs and gradient frames */
+.audit__panel::before, .audit__panel::after,
+.about__photo::before, .about__photo::after,
+.contact__form::before, .contact__form::after,
+.contact__form{ box-shadow: none; }
+.audit__panel::before, .audit__panel::after,
+.about__photo::before, .about__photo::after,
+.contact__form::before, .contact__form::after{ display: none; }
+.about__photo{ border: 1px solid var(--line-strong); box-shadow: none; }
+.contact__form{ border-color: var(--line); }
+.about__photo-frame{ background: none; padding: 0; box-shadow: none; border: 1px solid var(--line-strong); }
+.about__photo-frame::before{ display: none; }
