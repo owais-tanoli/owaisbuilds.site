@@ -232,8 +232,8 @@
   if (prefersReducedMotion) return;
 
   const ctx = canvas.getContext('2d');
-  const DOT_COLOR = '255, 122, 26';
-  const LINE_COLOR = '234, 88, 12';
+  const DOT_COLOR = '217, 72, 15';
+  const LINE_COLOR = '178, 58, 11';
   const LINK_DISTANCE = 130;
 
   let width = 0, height = 0, dpr = 1;
