@@ -1286,3 +1286,22 @@ html, body{ overflow-x: hidden; }
 .contact__form{ border-color: var(--line); }
 .about__photo-frame{ background: none; padding: 0; box-shadow: none; border: 1px solid var(--line-strong); }
 .about__photo-frame::before{ display: none; }
+
+/* =========================================================
+   v7 TYPOGRAPHY: Instrument Serif headlines, Instrument Sans text
+   Replaces the Outfit + Inter default pairing.
+   Delete this block to return to the v6 fonts.
+   ========================================================= */
+:root{
+  --ff-serif:   'Instrument Serif', Georgia, 'Times New Roman', serif;
+  --ff-display: 'Instrument Sans', 'Segoe UI', sans-serif;
+  --ff-body:    'Instrument Sans', 'Segoe UI', sans-serif;
+}
+h1, h2{
+  font-family: var(--ff-serif);
+  font-weight: 400;
+  letter-spacing: -0.012em;
+  line-height: 1.04;
+}
+h3, h4{ font-family: var(--ff-display); font-weight: 600; letter-spacing: -0.01em; }
+.gradient-text{ font-style: italic; }
