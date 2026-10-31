@@ -406,25 +406,39 @@
       </ul>
     </div>
     <div class="contact__form">
-<iframe
-            src="https://api.leadconnectorhq.com/widget/form/ojAvgf4wR36hr6sgXLrv"
-            style="width:100%;height:1170px;border:none;border-radius:8px"
-            id="inline-ojAvgf4wR36hr6sgXLrv"
-            data-layout="{'id':'INLINE'}"
-            data-trigger-type="alwaysShow"
-            data-trigger-value=""
-            data-activation-type="alwaysActivated"
-            data-activation-value=""
-            data-deactivation-type="neverDeactivate"
-            data-deactivation-value=""
-            data-form-name="OWAIS BUILDS – Automation Audit"
-            data-height="1170"
-            data-layout-iframe-id="inline-ojAvgf4wR36hr6sgXLrv"
-            data-form-id="ojAvgf4wR36hr6sgXLrv"
-            data-cookie-consent="true"
-            data-cookie-consent-provider="auto"
-            title="OWAIS BUILDS – Project enquiry">
-        </iframe>
+<form class="enquiry" action="https://formsubmit.co/iowaismuhammad@gmail.com" method="POST">
+        <input type="hidden" name="_subject" value="New enquiry from owaisbuilds.site">
+        <input type="hidden" name="_template" value="table">
+        <input type="hidden" name="_captcha" value="true">
+        <p class="enquiry__honey" aria-hidden="true"><label>Leave this empty <input type="text" name="_honey" tabindex="-1" autocomplete="off"></label></p>
+
+        <div class="enquiry__row">
+          <label class="field">Your name <input type="text" name="name" required autocomplete="name"></label>
+          <label class="field">Email <input type="email" name="email" required autocomplete="email"></label>
+        </div>
+        <label class="field">Phone (optional) <input type="tel" name="phone" autocomplete="tel"></label>
+        <label class="field">Business type
+          <select name="business">
+            <option>Home services</option>
+            <option>Professional services</option>
+            <option>Healthcare</option>
+            <option>E-commerce</option>
+            <option>Marketing agency</option>
+            <option>Other</option>
+          </select>
+        </label>
+        <fieldset class="enquiry__need">
+          <legend>What do you need help with?</legend>
+          <label><input type="checkbox" name="need" value="Website"> Website</label>
+          <label><input type="checkbox" name="need" value="Ads or SEO"> Ads or SEO</label>
+          <label><input type="checkbox" name="need" value="CRM or GoHighLevel"> CRM or GoHighLevel</label>
+          <label><input type="checkbox" name="need" value="Automation"> Automation</label>
+          <label><input type="checkbox" name="need" value="Not sure yet"> Not sure yet</label>
+        </fieldset>
+        <label class="field">Tell me about it <textarea name="message" rows="5" required></textarea></label>
+        <button class="btn btn--amber enquiry__submit" type="submit">Send enquiry</button>
+        <p class="enquiry__note">Sent straight to my email.</p>
+      </form>
     </div>
   </div>
 </section>

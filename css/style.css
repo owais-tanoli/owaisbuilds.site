@@ -289,3 +289,40 @@ h3{ font-family: var(--ff-sans); font-size: 19px; font-weight: 600; letter-spaci
 .btn--ghost{ background: transparent; font: inherit; }
 .journey .section__head h2{ grid-column: 1 / -1; }
 .journey .section__head p{ grid-column: 1 / span 6; grid-row: 2; margin-top: 20px; }
+
+/* =========================================================
+   v11: native enquiry form (sends to email), phone video removed, phone journey tap fix
+   ========================================================= */
+.enquiry{ display: grid; gap: 18px; }
+.enquiry__row{ display: grid; grid-template-columns: 1fr 1fr; gap: 18px; }
+.field{ display: grid; gap: 8px; font-size: 15px; color: var(--ink-soft); }
+.field input, .field select, .field textarea, .enquiry input[type="text"]{
+  width: 100%; min-height: 50px; padding: 12px 14px; font: inherit; font-size: 16px; color: var(--ink);
+  background: var(--bg-2); border: 1px solid var(--line-strong); border-radius: 0;
+}
+.field textarea{ min-height: 130px; resize: vertical; }
+.field input:focus, .field select:focus, .field textarea:focus{ outline: 2px solid var(--blue); outline-offset: 2px; border-color: var(--blue); }
+.enquiry__need{ border: 0; padding: 0; margin: 0; display: grid; gap: 10px; }
+.enquiry__need legend{ font-size: 15px; color: var(--ink-soft); padding: 0; margin-bottom: 10px; }
+.enquiry__need label{ display: inline-flex; align-items: center; gap: 10px; margin-right: 18px; margin-bottom: 8px; font-size: 16px; color: var(--ink); cursor: pointer; }
+.enquiry__need input{ width: 18px; height: 18px; accent-color: var(--amber); }
+.enquiry__honey{ position: absolute; left: -9999px; }
+.enquiry__submit{ width: fit-content; cursor: pointer; font: inherit; }
+.enquiry__note{ font-size: 14px; color: var(--ink-faint); }
+
+@media (max-width: 720px){
+  .hero__video{ display: none; }
+  .hero{ background: #120D09; }
+  .enquiry__row{ grid-template-columns: 1fr; }
+}
+
+/* journey on phones: steps become a swipeable row, the panel sits directly under them */
+@media (max-width: 900px){
+  .journey__steps{ display: flex; overflow-x: auto; gap: 8px; padding-bottom: 6px; scroll-snap-type: x proximity; -webkit-overflow-scrolling: touch; scrollbar-width: none; }
+  .journey__steps::-webkit-scrollbar{ display: none; }
+  .journey__step{ flex: 0 0 auto; width: auto; min-height: 48px; white-space: nowrap; scroll-snap-align: start; }
+  .journey__num{ min-width: 0; }
+  .journey__panel{ margin-top: 12px; }
+}
+
+@media (max-width: 1000px){ .journey .section__head p{ grid-column: 1 / -1; } }

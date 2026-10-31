@@ -71,7 +71,13 @@
     tools.textContent = b.dataset.tools;
   }
 
-  buttons.forEach((btn, k) => btn.addEventListener('click', () => show(k)));
+  buttons.forEach((btn, k) => btn.addEventListener('click', () => {
+    show(k);
+    // on phones, keep the tapped step visible in the swipeable row
+    if (window.matchMedia('(max-width: 900px)').matches) {
+      btn.scrollIntoView({ behavior: 'smooth', inline: 'nearest', block: 'nearest' });
+    }
+  }));
   prev.addEventListener('click', () => show(current - 1));
   next.addEventListener('click', () => show(current + 1));
   show(0);
