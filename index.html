@@ -39,6 +39,7 @@
     <a class="wordmark" href="#top" aria-label="OWAIS BUILDS home">OWAIS BUILDS</a>
     <nav class="top__nav" id="nav-links" aria-label="Main">
       <a href="#services">Services</a>
+      <a href="#journey">How It Connects</a>
       <a href="#work">Work</a>
       <a href="#industries">Industries</a>
       <a href="#about">About</a>
@@ -53,6 +54,10 @@
 
 <!-- HERO -->
 <section class="hero" id="top">
+  <video class="hero__video" autoplay muted loop playsinline preload="auto" aria-hidden="true">
+    <source src="assets/icons/hero-bg.mp4.mp4" type="video/mp4">
+  </video>
+  <div class="hero__shade" aria-hidden="true"></div>
   <div class="wrap hero__grid">
     <h1 class="hero__title">We build the systems behind business growth.</h1>
     <div class="hero__copy">
@@ -62,12 +67,6 @@
         <a class="btn btn--ghost" href="#services">Explore Our Services</a>
       </div>
     </div>
-    <figure class="hero__media">
-      <video class="hero__video" autoplay muted loop playsinline preload="auto" poster="" aria-hidden="true">
-        <source src="assets/icons/hero-bg.mp4.mp4" type="video/mp4">
-      </video>
-      <figcaption>Websites, CRM and automation, working as one.</figcaption>
-    </figure>
   </div>
 </section>
 
@@ -83,6 +82,39 @@
     </ul>
   </div>
 </section>
+
+<!-- CONNECTED JOURNEY (interactive) -->
+<section class="section journey" id="journey">
+    <div class="wrap">
+      <header class="section__head">
+        <h2>One customer journey, connected.</h2>
+        <p>Select each step to see what it does. The exact tools depend on your business and requirements.</p>
+      </header>
+      <div class="journey__wrap">
+        <ol class="journey__steps">
+          <li><button class="journey__step is-active" type="button" aria-pressed="true" data-title="Customers find you" data-text="A fast, clear website, search foundations and ad campaigns set up with tracking, so visitors arrive ready to act." data-tools="Website code (HTML, CSS, JavaScript), Google Search Console, Google Ads, Meta Ads"><span class="journey__num">01</span><span class="journey__name">Website, Search &amp; Ads</span></button></li>
+          <li><button class="journey__step" type="button" aria-pressed="false" data-title="A focused page for one offer" data-text="One clear offer, a short form and a thank-you state. Built to convert visitors who came from a specific campaign or search." data-tools="HTML, CSS, JavaScript, GoHighLevel forms"><span class="journey__num">02</span><span class="journey__name">Landing Page</span></button></li>
+          <li><button class="journey__step" type="button" aria-pressed="false" data-title="Every enquiry is captured" data-text="Forms, calls and campaign leads go straight into your CRM with the source recorded, so no enquiry gets lost in an inbox." data-tools="GoHighLevel forms, webhooks, n8n, Make"><span class="journey__num">03</span><span class="journey__name">Lead Capture</span></button></li>
+          <li><button class="journey__step" type="button" aria-pressed="false" data-title="Each lead becomes a contact" data-text="The lead is created as a contact in GoHighLevel, tagged by source and interest, and placed in a pipeline stage." data-tools="GoHighLevel CRM"><span class="journey__num">04</span><span class="journey__name">CRM</span></button></li>
+          <li><button class="journey__step" type="button" aria-pressed="false" data-title="A response within minutes" data-text="SMS and email go out right away, including a text-back after a missed call, while the lead is still interested." data-tools="GoHighLevel SMS and email workflows, AI assistants where appropriate"><span class="journey__num">05</span><span class="journey__name">Instant Follow-Up</span></button></li>
+          <li><button class="journey__step" type="button" aria-pressed="false" data-title="The lead books a time" data-text="The lead picks a slot from your calendar. Automatic confirmations and reminders cut down on no-shows." data-tools="GoHighLevel calendars and reminders"><span class="journey__num">06</span><span class="journey__name">Appointment Booking</span></button></li>
+          <li><button class="journey__step" type="button" aria-pressed="false" data-title="Opportunities move forward" data-text="As leads take action, they move through pipeline stages automatically, so follow-up happens on time, not from memory." data-tools="GoHighLevel pipelines, n8n, Make"><span class="journey__num">07</span><span class="journey__name">Sales Pipeline</span></button></li>
+          <li><button class="journey__step" type="button" aria-pressed="false" data-title="See what works, then improve it" data-text="Track where enquiries come from and where they drop off, then adjust the page, the message or the workflow based on the data." data-tools="GoHighLevel reporting, Google Analytics, Search Console"><span class="journey__num">08</span><span class="journey__name">Reporting &amp; Optimization</span></button></li>
+        </ol>
+
+        <div class="journey__panel" aria-live="polite">
+          <p class="journey__label" id="journey-label">Step 1 of 8</p>
+          <h3 class="journey__title" id="journey-title">Customers find you</h3>
+          <p class="journey__text" id="journey-text">A fast, clear website, search foundations and ad campaigns set up with tracking, so visitors arrive ready to act.</p>
+          <p class="journey__tools"><strong>Typical tools:</strong> <span id="journey-tools">Website code (HTML, CSS, JavaScript), Google Search Console, Google Ads, Meta Ads</span></p>
+          <div class="journey__nav">
+            <button class="btn btn--ghost" type="button" id="journey-prev">Previous</button>
+            <button class="btn btn--amber" type="button" id="journey-next">Next step</button>
+          </div>
+        </div>
+      </div>
+    </div>
+  </section>
 
 <!-- SERVICES -->
 <section class="section services" id="services">
@@ -407,6 +439,7 @@
     <nav aria-label="Footer">
       <h3>Navigate</h3>
       <a href="#services">Services</a>
+      <a href="#journey">How It Connects</a>
       <a href="#industries">Industries</a>
       <a href="#work">Work</a>
       <a href="#about">About</a>
