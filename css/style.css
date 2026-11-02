@@ -326,3 +326,23 @@ h3{ font-family: var(--ff-sans); font-size: 19px; font-weight: 600; letter-spaci
 }
 
 @media (max-width: 1000px){ .journey .section__head p{ grid-column: 1 / -1; } }
+
+/* =========================================================
+   v12: FAQ opens each answer on click (native details, no script)
+   ========================================================= */
+.faq__text{ grid-column: 6 / span 7; columns: auto; font-size: 17px; }
+.faq-q{ border-top: 1px solid var(--line); }
+.faq-q:last-child{ border-bottom: 1px solid var(--line); }
+.faq-q summary{ list-style: none; cursor: pointer; display: flex; justify-content: space-between; align-items: center; gap: 24px; padding: 22px 0; font-size: 19px; font-weight: 600; color: var(--ink); }
+.faq-q summary::-webkit-details-marker{ display: none; }
+.faq-q summary::after{ content: '+'; flex: 0 0 auto; font-weight: 400; font-size: 26px; line-height: 1; color: var(--amber); transition: transform .2s ease; }
+.faq-q[open] summary::after{ content: '\2212'; }
+.faq-q summary:hover{ color: var(--amber); }
+.faq-q summary:focus-visible{ outline: 2px solid var(--blue); outline-offset: 4px; }
+.faq-q p{ padding: 0 0 26px; max-width: 62ch; color: var(--ink-soft); }
+@media (prefers-reduced-motion: no-preference){
+  .faq-q[open] p{ animation: rise .35s cubic-bezier(.2,.7,.2,1) both; }
+}
+@media (max-width: 1000px){
+  .faq__text{ grid-column: 1 / -1; }
+}
