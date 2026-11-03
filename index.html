@@ -44,6 +44,7 @@
       <a href="#industries">Industries</a>
       <a href="#about">About</a>
       <a href="#faq">FAQ</a>
+      <a href="#contact">Contact</a>
     </nav>
     <a class="btn btn--amber top__cta" href="#contact">Let's Build Something</a>
     <button class="top__menu" id="nav-toggle" aria-expanded="false" aria-controls="nav-links">Menu</button>
@@ -124,6 +125,7 @@
       <p>Each part works on its own. Together they connect: the website captures, the marketing brings people in, the CRM organises them and automation keeps them moving.</p>
     </header>
 
+    <div class="svc-grid">
     <article class="svc">
       <div class="svc__name">
         <h3>Digital Presence</h3>
@@ -188,6 +190,7 @@
         <li>Business process automation</li>
       </ul>
     </article>
+    </div>
 
     <p class="svc__note">Want all of it working together? I connect your website, campaigns, CRM and automation into one system, scoped to your business, starting with the area that matters most.</p>
   </div>
@@ -242,8 +245,15 @@
       <p class="proj__note">Still to add: analytics, and a case study of its own results once there are real ones.</p>
     </article>
 
+    <div class="filters" role="group" aria-label="Filter concept builds">
+      <button class="filter" type="button" data-filter="all" aria-pressed="true">All</button>
+      <button class="filter" type="button" data-filter="websites" aria-pressed="false">Websites</button>
+      <button class="filter" type="button" data-filter="marketing" aria-pressed="false">Marketing</button>
+      <button class="filter" type="button" data-filter="crm" aria-pressed="false">CRM &amp; Automation</button>
+    </div>
+
     <div class="proj-grid">
-      <article class="proj">
+      <article class="proj" data-cat="websites">
         <p class="proj__tag">Concept build</p>
         <h3>Local Business Website</h3>
         <dl>
@@ -253,7 +263,7 @@
         </dl>
         <p class="proj__note">Not built yet. A live link and screenshots will be added when finished.</p>
       </article>
-      <article class="proj">
+      <article class="proj" data-cat="crm">
         <p class="proj__tag">Concept build</p>
         <h3>Lead Generation System</h3>
         <dl>
@@ -263,7 +273,7 @@
         </dl>
         <p class="proj__note">Not built yet. A live link and screenshots will be added when finished.</p>
       </article>
-      <article class="proj">
+      <article class="proj" data-cat="crm">
         <p class="proj__tag">Concept build</p>
         <h3>Missed Call Recovery</h3>
         <dl>
@@ -273,7 +283,7 @@
         </dl>
         <p class="proj__note">Not built yet. A live link and screenshots will be added when finished.</p>
       </article>
-      <article class="proj">
+      <article class="proj" data-cat="marketing">
         <p class="proj__tag">Concept build</p>
         <h3>Local SEO Website Architecture</h3>
         <dl>
@@ -283,7 +293,7 @@
         </dl>
         <p class="proj__note">Not built yet. A live link and screenshots will be added when finished.</p>
       </article>
-      <article class="proj">
+      <article class="proj" data-cat="marketing">
         <p class="proj__tag">Concept build</p>
         <h3>Paid Campaign Landing Page</h3>
         <dl>
@@ -293,7 +303,7 @@
         </dl>
         <p class="proj__note">No campaign has been run, so no performance is claimed.</p>
       </article>
-      <article class="proj">
+      <article class="proj" data-cat="crm">
         <p class="proj__tag">Concept build</p>
         <h3>Agency Implementation System</h3>
         <dl>
@@ -423,6 +433,7 @@
         <p>We start with a free call where I learn about your business and current process. From there, I put together a plan for what to automate and how.</p>
       </details>
     </div>
+    <button class="btn btn--ghost faq__more" type="button" id="faq-more" aria-expanded="false" hidden>Show all questions</button>
   </div>
 </section>
 
@@ -520,6 +531,8 @@
     <p>&copy; 2026 OWAIS BUILDS. All rights reserved.</p>
   </div>
 </footer>
+
+<a class="wa" href="https://wa.me/971552571702" target="_blank" rel="noopener">Chat on WhatsApp</a>
 
 <!--Start of Tawk.to Script-->
 <!--Start of Tawk.to Script-->

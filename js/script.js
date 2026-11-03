@@ -83,3 +83,34 @@
   show(0);
 })();
 
+
+/* Work filters (concept builds) and FAQ "show all" toggle. Without script, everything stays visible. */
+(function () {
+  var filters = Array.prototype.slice.call(document.querySelectorAll('.filter'));
+  var items = Array.prototype.slice.call(document.querySelectorAll('.proj-grid .proj'));
+  filters.forEach(function (f) {
+    f.addEventListener('click', function () {
+      var cat = f.getAttribute('data-filter');
+      filters.forEach(function (x) { x.setAttribute('aria-pressed', String(x === f)); });
+      items.forEach(function (it) {
+        it.hidden = !(cat === 'all' || it.getAttribute('data-cat') === cat);
+      });
+    });
+  });
+
+  var qs = Array.prototype.slice.call(document.querySelectorAll('.faq-q'));
+  var more = document.getElementById('faq-more');
+  var LIMIT = 6;
+  if (more && qs.length > LIMIT) {
+    var expanded = false;
+    qs.forEach(function (q, i) { if (i >= LIMIT) q.hidden = true; });
+    more.hidden = false;
+    more.textContent = 'Show all ' + qs.length + ' questions';
+    more.addEventListener('click', function () {
+      expanded = !expanded;
+      qs.forEach(function (q, i) { if (i >= LIMIT) q.hidden = !expanded; });
+      more.textContent = expanded ? 'Show fewer questions' : 'Show all ' + qs.length + ' questions';
+      more.setAttribute('aria-expanded', String(expanded));
+    });
+  }
+})();

@@ -346,3 +346,28 @@ h3{ font-family: var(--ff-sans); font-size: 19px; font-weight: 600; letter-spaci
 @media (max-width: 1000px){
   .faq__text{ grid-column: 1 / -1; }
 }
+
+/* =========================================================
+   v13: service cards, work filters, FAQ show-more, WhatsApp button
+   ========================================================= */
+.svc-grid{ display: grid; grid-template-columns: 1fr 1fr; gap: var(--gap); }
+.svc-grid .svc{ display: flex; flex-direction: column; gap: 28px; padding: clamp(28px, 3vw, 44px); border: 1px solid var(--line); background: var(--bg-2); }
+.svc-grid .svc__list{ grid-template-columns: 1fr 1fr; gap: 10px 24px; }
+.svc-grid .svc__name p{ max-width: none; }
+@media (max-width: 1000px){ .svc-grid{ grid-template-columns: 1fr; } }
+
+.filters{ display: flex; flex-wrap: wrap; gap: 10px; margin-bottom: 40px; }
+.filter{ min-height: 44px; padding: 0 18px; background: none; border: 1px solid var(--line); color: var(--ink-soft); font: inherit; font-size: 15px; cursor: pointer; transition: background-color .2s ease, color .2s ease, border-color .2s ease; }
+.filter:hover{ color: var(--ink); border-color: var(--ink-faint); }
+.filter[aria-pressed="true"]{ background: var(--blue); border-color: var(--blue); color: var(--blue-ink); font-weight: 600; }
+.proj[hidden]{ display: none; }
+
+.faq__more{ margin-top: 28px; min-height: 48px; font-size: 15px; cursor: pointer; }
+.faq__more[hidden]{ display: none; }
+
+.wa{ position: fixed; left: 20px; bottom: 20px; z-index: 40; display: inline-flex; align-items: center; min-height: 52px; padding: 0 20px; background: var(--amber); color: var(--amber-ink); font-weight: 600; font-size: 15px; text-decoration: none; }
+.wa:hover{ background: #FFC06A; }
+.wa:focus-visible{ outline: 2px solid var(--blue); outline-offset: 3px; }
+@media (max-width: 720px){ .wa{ left: 12px; bottom: 12px; min-height: 48px; padding: 0 16px; font-size: 14px; } }
+@media (max-width: 1000px){ .faq__grid{ grid-template-columns: minmax(0, 1fr); } .faq__text{ min-width: 0; } }
+@media (max-width: 720px){ .svc-grid .svc__list{ grid-template-columns: 1fr; } }
