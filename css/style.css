@@ -371,3 +371,7 @@ h3{ font-family: var(--ff-sans); font-size: 19px; font-weight: 600; letter-spaci
 @media (max-width: 720px){ .wa{ left: 12px; bottom: 12px; min-height: 48px; padding: 0 16px; font-size: 14px; } }
 @media (max-width: 1000px){ .faq__grid{ grid-template-columns: minmax(0, 1fr); } .faq__text{ min-width: 0; } }
 @media (max-width: 720px){ .svc-grid .svc__list{ grid-template-columns: 1fr; } }
+
+/* header mark: two linked nodes, same idea as the favicon */
+.wordmark{ display: inline-flex; align-items: center; gap: 12px; }
+.wordmark .mark{ width: 32px; height: 32px; flex: 0 0 auto; }
