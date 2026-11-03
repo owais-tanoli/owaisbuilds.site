@@ -365,10 +365,11 @@ h3{ font-family: var(--ff-sans); font-size: 19px; font-weight: 600; letter-spaci
 .faq__more{ margin-top: 28px; min-height: 48px; font-size: 15px; cursor: pointer; }
 .faq__more[hidden]{ display: none; }
 
-.wa{ position: fixed; left: 20px; bottom: 20px; z-index: 40; display: inline-flex; align-items: center; min-height: 52px; padding: 0 20px; background: var(--amber); color: var(--amber-ink); font-weight: 600; font-size: 15px; text-decoration: none; }
-.wa:hover{ background: #FFC06A; }
+/* icon-only WhatsApp button, stacked above the chat bubble at bottom right */
+.wa{ position: fixed; right: 20px; bottom: 96px; z-index: 40; display: inline-flex; align-items: center; justify-content: center; width: 56px; height: 56px; border-radius: 50%; background: #25D366; color: #FFFFFF; box-shadow: 0 6px 18px rgba(0,0,0,0.35); text-decoration: none; }
+.wa:hover{ background: #1EBE5A; }
 .wa:focus-visible{ outline: 2px solid var(--blue); outline-offset: 3px; }
-@media (max-width: 720px){ .wa{ left: 12px; bottom: 12px; min-height: 48px; padding: 0 16px; font-size: 14px; } }
+@media (max-width: 720px){ .wa{ right: 16px; bottom: 90px; width: 52px; height: 52px; } }
 @media (max-width: 1000px){ .faq__grid{ grid-template-columns: minmax(0, 1fr); } .faq__text{ min-width: 0; } }
 @media (max-width: 720px){ .svc-grid .svc__list{ grid-template-columns: 1fr; } }
 
@@ -378,5 +379,7 @@ h3{ font-family: var(--ff-sans); font-size: 19px; font-weight: 600; letter-spaci
 @media (max-width: 720px){ .wordmark img{ height: 52px; } }
 
 /* WhatsApp button icon */
-.wa{ gap: 10px; }
-.wa svg{ width: 22px; height: 22px; flex: 0 0 auto; }
+.wa svg{ width: 30px; height: 30px; flex: 0 0 auto; }
+
+/* tagline as live text in the footer, where it can be read */
+.foot__tag{ font-size: 15px; font-weight: 600; letter-spacing: 0.28em; text-transform: uppercase; color: var(--amber); margin: -4px 0 22px; }
